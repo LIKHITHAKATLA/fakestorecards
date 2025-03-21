@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .addtocart{
+            display: none;
+        }
+        
+        h1 {
+        text-align: center;
+        margin: 20px auto; 
+        width: 100%; 
+        }
+    </style>
+</head>
+<body>
+    <h1>YOUR CART</h1>
+    <script>
+        let dataa = JSON.parse(localStorage.getItem("addtocart"))
+        let newdata = dataa.map((val) => {
+
+            var div = document.createElement("div");
+            div.classList.add("maindiv");
+
+            var image = document.createElement("img");
+            image.src = val.image;
+
+            var title = document.createElement("h2");
+            title.innerText = val.title;
+
+            var price = document.createElement("h2");
+            price.innerText = `₹ ${val.price}`;
+
+            var desc = document.createElement("p");
+            desc.innerText = val.description;
+
+            var category = document.createElement("h2");
+            category.innerText = val.category;
+
+            var rating = document.createElement("div");
+            rating.classList.add("rating");
+            var rate = document.createElement("h2");
+            var count = document.createElement("h2");
+            rate.innerText = `⭐ ${val.rating.rate} (${val.rating.count} reviews)`;
+
+            var buttons = document.createElement("div")
+            buttons.classList.add("buttons")
+
+            var delet = document.createElement("button");
+            delet.classList.add("delete")
+            delet.innerText = "DELETE";
+
+            var addtocart = document.createElement("button")
+            addtocart.classList.add("addtocart")
+            addtocart.innerText = "ADD TO CART"
+
+            document.body.append(div);
+
+            div.append(image, title, price, desc, category, rating,buttons);
+            buttons.append(delet,addtocart)
+            rating.append(rate, count);
+
+            delet.addEventListener("click", () => {
+                confirm("Are you sure do you want to delete the product")
+                div.remove();
+            });
+        })
+
+    </script>
+
+
+    
+</body>
+</html>
